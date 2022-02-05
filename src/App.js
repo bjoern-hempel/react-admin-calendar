@@ -1,9 +1,14 @@
 import * as React from "react";
 import { Admin, Resource, ListGuesser, fetchUtils } from 'react-admin';
 import jsonServerProvider from 'ra-data-json-server';
-import { UserList } from './list/users';
-import { CalendarList } from './list/calendars';
-import { EventList } from './list/events';
+import { CalendarList } from './list/calendar';
+import { CalendarImageList } from './list/calendarImage';
+import { CalendarStyleList } from './list/calendarStyle';
+import { EventList } from './list/event';
+import { HolidayList } from './list/holiday';
+import { HolidayGroupList } from './list/holidayGroup';
+import { ImageList } from './list/image';
+import { UserList } from './list/user';
 
 const httpClient = (url, options = {}) => {
     if (!options.headers) {
@@ -16,15 +21,14 @@ const dataProvider = jsonServerProvider('http://localhost/api/v1', httpClient);
 
 const App = () => (
     <Admin dataProvider={dataProvider}>
-        <Resource name="users" list={UserList} />
         <Resource name="calendars" list={CalendarList} />
-        <Resource name="calendar_images" list={ListGuesser} />
-        <Resource name="calendar_styles" list={ListGuesser} />
+        <Resource name="calendar_images" list={CalendarImageList} />
+        <Resource name="calendar_styles" list={CalendarStyleList} />
         <Resource name="events" list={EventList} />
-        <Resource name="holidays" list={ListGuesser} />
-        <Resource name="holidays" list={ListGuesser} />
-        <Resource name="holiday_groups" list={ListGuesser} />
-        <Resource name="images" list={ListGuesser} />
+        <Resource name="holidays" list={HolidayList} />
+        <Resource name="holiday_groups" list={HolidayGroupList} />
+        <Resource name="images" list={ImageList} />
+        <Resource name="users" list={UserList} />
     </Admin>
 );
 

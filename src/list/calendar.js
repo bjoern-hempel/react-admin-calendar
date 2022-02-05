@@ -1,5 +1,5 @@
 import * as React from "react";
-import { List, Datagrid, TextField, NumberField, ReferenceField, EditButton } from 'react-admin';
+import { List, Datagrid, TextField, NumberField, ReferenceField, EditButton, BooleanField } from 'react-admin';
 
 export const CalendarList = props => (
     <List {...props}>
@@ -18,6 +18,9 @@ export const CalendarList = props => (
                 <TextField source="name" />
             </ReferenceField>
             <TextField source="config.backgroundColor" label="Background Color" />
+            <BooleanField source="config.printCalendarWeek" label="Print Calendar Week" />
+            <BooleanField source="config.printWeekNumber" label="Print Week Number" />
+            <NumberField source="config.aspectRatio" options={{ maximumFractionDigits: 3 }} label="Aspect Ratio" />
             <EditButton />
         </Datagrid>
     </List>
