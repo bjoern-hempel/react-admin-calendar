@@ -1,25 +1,31 @@
-import logo from './logo.svg';
-import './App.css';
+import * as React from "react";
+import { Admin, Resource, ListGuesser, fetchUtils } from 'react-admin';
+import jsonServerProvider from 'ra-data-json-server';
+import { UserList } from './list/users';
+import { CalendarList } from './list/calendars';
+import { EventList } from './list/events';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+const httpClient = (url, options = {}) => {
+    if (!options.headers) {
+        options.headers = new Headers({ Accept: 'application/json' });
+    }
+    return fetchUtils.fetchJson(url, options);
 }
+
+const dataProvider = jsonServerProvider('http://localhost/api/v1', httpClient);
+
+const App = () => (
+    <Admin dataProvider={dataProvider}>
+        <Resource name="users" list={UserList} />
+        <Resource name="calendars" list={CalendarList} />
+        <Resource name="calendar_images" list={ListGuesser} />
+        <Resource name="calendar_styles" list={ListGuesser} />
+        <Resource name="events" list={EventList} />
+        <Resource name="holidays" list={ListGuesser} />
+        <Resource name="holidays" list={ListGuesser} />
+        <Resource name="holiday_groups" list={ListGuesser} />
+        <Resource name="images" list={ListGuesser} />
+    </Admin>
+);
 
 export default App;
